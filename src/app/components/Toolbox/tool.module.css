@@ -20,8 +20,10 @@ color: theme('colors.text1');
 }
 
 .itemcontainer{
+margin-bottom: 20vh; 
+}
 
- }
+
         .colorBox{
             @apply h-5 w-5 mr-1 rounded-sm  cursor-pointer; 
 

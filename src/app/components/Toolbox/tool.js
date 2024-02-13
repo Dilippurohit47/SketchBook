@@ -36,7 +36,7 @@ const Toolbox = () => {
                 className={cx(styles.colorBox, {
                   [styles.active] :color === COLORS.BLACK,
                 })}
-                style={{ backgroundColor: "blue"}}
+                style={{ backgroundColor: COLORS.BLACK}}
                 onClick={() => updateColor(COLORS.BLACK)}
               />
               <div
@@ -82,7 +82,7 @@ const Toolbox = () => {
       <div className={styles.toolitem}>
         <h4 className={styles.tooltext}>Brush Size {activeMenuItem}</h4>
 
-        <div className={styles.itemContainer}>
+        <div>
           <input
             type="range"
             min={1}
