@@ -36,7 +36,7 @@ const Toolbox = () => {
                 className={cx(styles.colorBox, {
                   [styles.active] :color === COLORS.BLACK,
                 })}
-                style={{ backgroundColor: COLORS.BLACK }}
+                style={{ backgroundColor: "blue"}}
                 onClick={() => updateColor(COLORS.BLACK)}
               />
               <div
