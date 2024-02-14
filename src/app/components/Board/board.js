@@ -100,9 +100,9 @@ const handlechange =(config) =>{
         }
 
         const handleMouseDown =(e)=> {
+
             shouldDraw.current = true
           beginPath(e.clientX,e.clientY)
-
           socket.emit('beginPath',{x:e.clientX,y:e.clientY})
           
         }
@@ -134,6 +134,40 @@ const handlechange =(config) =>{
           socket.on('beginPath',handleBeginPath)
           socket.on('drawLine',handledrawLine)
 
+
+          const handleTouchStart = (event) =>{
+            shouldDraw.current = true
+
+            const touch = event.touches[0]; 
+            const x = touch.clientX;
+            const y = touch.clientY;
+          beginPath(x,y)
+            
+          }
+          const handleTouchMove = (event) =>{
+            if(!shouldDraw.current) {
+              return
+            }
+            event.preventDefault();
+            const touch = event.touches[0]; 
+            const x = touch.clientX;
+            const y = touch.clientY;
+            drawLine(x, y);
+
+          }
+
+          function handleTouchEnd(event) {
+            shouldDraw.current = false
+            event.preventDefault();
+            const imageData =context.getImageData(0,0,canvas.width , canvas.height)
+            drawHistory.current.push(imageData);
+            historyPointer.current = drawHistory.current.length - 1
+
+        }
+          canvas.addEventListener('touchstart', handleTouchStart);
+          canvas.addEventListener('touchmove', handleTouchMove);
+          canvas.addEventListener('touchend', handleTouchEnd);
+
           return() =>{
             canvas.removeEventListener("mousedown",handleMouseDown)
             canvas.removeEventListener("mousemove",handleMouseMOve)
@@ -148,7 +182,7 @@ const handlechange =(config) =>{
 
   return (
 
-<canvas ref={canvasRef} >
+<canvas className='bg-red-500 overflow-hidden' ref={canvasRef} >
     
 </canvas>
 

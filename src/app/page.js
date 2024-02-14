@@ -8,9 +8,12 @@ export default function Home() {
   return (
     <>
 
-  <Menu/>
+<div className="overflow-x-hidden overflow-y-hidden">
+<Menu/>
   <Toolbox/>
-  <Board/>
+  <Board/> </div>
+
+
   </>
   );
 }
