@@ -8,16 +8,18 @@ import {
   faRotateRight,
   faRotateLeft,
   faFileArrowDown,
+  faSquare,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { FaRegSquare } from "react-icons/fa6";
 import styles from "./index.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { MENU_ITEMS } from "@/app/constant";
 import { menuItemClick, actionItemClick } from "@/app/slice/MenuSlice";
 
-
 const Menu = () => {
   const dispatch = useDispatch();
-  const {activeMenuItem} = useSelector((state) => state.menu);
+  const { activeMenuItem } = useSelector((state) => state.menu);
 
   const handleMenuClick = (itemname) => {
     dispatch(menuItemClick(itemname));
@@ -37,7 +39,14 @@ const Menu = () => {
       >
         <FontAwesomeIcon icon={faPencil} className={styles.icon} />
       </div>
-
+      <div
+        className={cx(styles.iconWrapper, {
+          [styles.active]: activeMenuItem === MENU_ITEMS.SQUARE,
+        })}
+        onClick={() => handleMenuClick(MENU_ITEMS.SQUARE)}
+      >
+      <FaRegSquare/>
+      </div>
       <div
         className={cx(styles.iconWrapper, {
           [styles.active]: activeMenuItem === MENU_ITEMS.ERASER,
@@ -67,6 +76,7 @@ const Menu = () => {
       >
         <FontAwesomeIcon icon={faFileArrowDown} className={styles.icon} />
       </div>
+
     </div>
   );
 };

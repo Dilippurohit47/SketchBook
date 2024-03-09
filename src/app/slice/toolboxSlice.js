@@ -9,6 +9,10 @@ const initialState ={
         color :COLORS.BLACK,
         size:3
     },
+    [MENU_ITEMS.SQUARE] :{
+        color :COLORS.BLACK,
+        size:3
+    },
     [MENU_ITEMS.ERASER] :{
         color :COLORS.WHITE,
         size:3

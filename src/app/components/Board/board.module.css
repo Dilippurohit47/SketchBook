@@ -1,0 +1,20 @@
+
+
+.overlay{
+    @apply sm:hidden ;
+    background-color: red;
+    color: red;
+    font-size: 20px;
+    position: absolute;
+    z-index: 9999;
+top: -8px;left: -15px;
+    border-radius: 50%;
+    height: 5vh;
+    width: 5vh;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    opacity: 0.7;
+    cursor: none;
+
+
+}

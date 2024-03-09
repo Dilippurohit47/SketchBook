@@ -14,20 +14,32 @@ const Toolbox = () => {
   const { color ,size} = useSelector((state) => state.toolbox[activeMenuItem]);
 
   const updateBrushSize = (e) => {
+    let newSize = parseInt(e.target.value, 10);
 
-    dispatch(changeBrushSize({ item: activeMenuItem, size: e.target.value }));
+
+    if (isNaN(newSize)) {
+      newSize = 1; // Set newSize to a default value (1 in this case)
+  }
+    if(newSize > 100){
+      newSize = 100
+    console.log(newSize)
+
+    }
+    if(newSize <= -1){
+      newSize = 1
+    console.log(newSize)
+    }
+    dispatch(changeBrushSize({ item: activeMenuItem, size:newSize }));
     socket.emit("changeConfig",{color,size:e.target.value})
   };
 
   const updateColor = (newColor) => {
     dispatch(changeColor({ item: activeMenuItem, color: newColor }));
     socket.emit("changeConfig",{color:newColor,size})
-
   };
-
   return (
     <div className={styles.toolboxContainer}>
-      {activeMenuItem === "PENCIL" && (
+      {(activeMenuItem === "PENCIL" || activeMenuItem === "SQUARE") && (
         <>
           <div className={styles.toolitem}>
             <h4 className={styles.tooltext}>Stroke Color</h4>
@@ -86,11 +98,14 @@ const Toolbox = () => {
           <input
             type="range"
             min={1}
-            max={10}
+            max={100}
             step={1}
             value={size}
             onChange={(e) =>updateBrushSize(e)}
           />
+       
+
+        <input className="border block  px-2 w-[60px] " value={size} max={100} placeholder="Add Size" onChange={(e) =>updateBrushSize(e)}/>
         </div>
       </div>
     </div>
